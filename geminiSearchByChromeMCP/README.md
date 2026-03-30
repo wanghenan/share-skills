@@ -9,13 +9,28 @@
 ```bash
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222
 ```
+chrome-devtools-mcp配置 https://developer.chrome.com/blog/chrome-devtools-mcp-debug-your-browser-session
 
 ### 2. OpenClaw 配置
 
-确保 `~/.openclaw/openclaw.json` 中 `plugins.allow` 包含 `browser`：
+修改 `~/.openclaw/openclaw.json` 
 
 ```json
 {
+  browser: {
+    enabled: true,
+    defaultProfile: 'user',
+    profiles: {
+      user: {
+        cdpPort: 9222,
+        driver: 'existing-session',
+        color: '#00AA00',
+      },
+    },
+  },
+  tools: {
+    profile: 'full',
+  },
   "plugins": {
     "allow": ["acpx", "minimax", "feishu", "browser"]
   }
